@@ -1,15 +1,11 @@
 package it.unibo.mvc;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.Random;
 
+import javax.swing.JTextField;
+import java.util.Random;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
 /**
  * This class is a simple application that writes a random number on a file.
  * This application does not exploit the model-view-controller pattern, and as
@@ -26,22 +22,28 @@ public class MiniGUI {
     /**
      * Creates a new {@link MiniGUI}.
      */
-    public MiniGUI() {
-        final JPanel canvas = new JPanel();
-        canvas.setLayout(new BorderLayout());
-        final JButton write = new JButton("Print a random number on standard output");
-        canvas.add(write, BorderLayout.CENTER);
-        frame.setContentPane(canvas);
+    public MiniGUI() {        
+        frame.setLayout(new BorderLayout());
+        JPanel newPanel = new JPanel();
+        newPanel.setLayout(new BoxLayout(newPanel, BoxLayout.X_AXIS));
+        JTextField tf = new JTextField("Result");
+        frame.getContentPane().add(tf, BorderLayout.NORTH);
+        final JButton writeButton = new JButton("Print a random number on standard output");
+        newPanel.add(writeButton);
+        frame.getContentPane().add(newPanel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         /*
          * Handlers
          */
-        write.addActionListener(new ActionListener() {
+        writeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent e) {
-                System.out.println(randomGenerator.nextInt());
+                int n = randomGenerator.nextInt();
+                System.out.println(n);
+                tf.setText(Integer.toString(n));
             }
         });
+        
     }
 
     private void display() {
@@ -54,6 +56,7 @@ public class MiniGUI {
          * specify the size of a window in pixel: it takes into account the
          * current resolution.
          */
+        
         final Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
         final int sw = (int) screen.getWidth();
         final int sh = (int) screen.getHeight();
@@ -67,7 +70,7 @@ public class MiniGUI {
         /*
          * Resize the frame to minimum size
          */
-        frame.pack();
+        // frame.pack();
         /*
          * OK, ready to pull the frame onscreen
          */
