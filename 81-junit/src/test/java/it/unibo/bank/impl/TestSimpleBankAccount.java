@@ -9,6 +9,7 @@ import it.unibo.bank.api.BankAccount;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+// import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
@@ -71,6 +72,8 @@ class TestSimpleBankAccount {
             assertFalse(e.getMessage().isBlank()); // Not a blank or empty message
             assertTrue(e.getMessage().length() >= ACCEPTABLE_MESSAGE_LENGTH); // A message with a decent length
         }
+        // assertThrows(IllegalArgumentException.class, () -> bankAccount.deposit(aBianchi.getUserID(), AMOUNT));
+        
         /*
          * Conciser alternative
          * (once you learn reflection, and preferably after you have learnt lambda expressions):
