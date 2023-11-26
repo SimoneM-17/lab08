@@ -1,3 +1,14 @@
-*.class
-build/
+# hidden files
+.idea
 .gradle/
+.vscode/
+*.iml
+
+# output folders
+bin/
+build/
+
+# files ignored by extension
+*.class
+*.DS_Store
+deleteme/
