@@ -30,14 +30,13 @@ class TestDeathNote {
     public void testRuleGetter() {
         assertThrows(IllegalArgumentException.class, () -> deathNote.getRule(0));
         assertThrows(IllegalArgumentException.class, () -> deathNote.getRule(-1));
-        assertThrows(IllegalArgumentException.class, () -> deathNote.getRule(DeathNote.RULES.size()));
+        assertThrows(IllegalArgumentException.class, () -> deathNote.getRule(DeathNote.RULES.size() + 1));
         assertDoesNotThrow(() -> deathNote.getRule(1));
         try {
             deathNote.getRule(-1);
         } catch (IllegalArgumentException e) {
             assertNotNull(e.getMessage());
             assertFalse(e.getMessage().isBlank());
-            assertFalse(e.getMessage().isEmpty());
         }
     }
 
@@ -46,7 +45,6 @@ class TestDeathNote {
         for (String rule: DeathNote.RULES) {
             assertNotNull(rule);
             assertFalse(rule.isBlank());
-            assertFalse(rule.isEmpty());
         }
     }
 
@@ -60,6 +58,7 @@ class TestDeathNote {
         // ???
         assertThrows(NullPointerException.class, () -> deathNote.writeName(""));
         assertThrows(NullPointerException.class, () -> deathNote.writeName(" "));
+        assertFalse(deathNote.isNameWritten(""));
     }
 
     @Test
